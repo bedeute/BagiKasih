@@ -1,0 +1,87 @@
+<!-- mid-content -->
+<div class="mid-content">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="sidebar">
+				<?=$this->load->view('user_right_sidebar')?>
+			</div>
+			<div class="span9">
+				<div class="content">
+					<ul class="breadcrumb">
+						<li><?=anchor('/', 'Home')?> <span class="divider">/</span></li>
+						<li><?=anchor('user', langtext('account'))?> <span class="divider">/</span></li>
+						<li class="active"><a><?=anchor('user/edit_profile', langtext('edit_profile'))?></a></li>
+					</ul>
+					<?php 
+					if(sizeof($_POST) > 0) extract($_POST);
+					else {
+						extract(get_object_vars($cu));
+					}
+					?>
+					<h3 class="text-left"><?=langtext('my_account')?></h3>
+					<div class="row-fluid">
+						<div class="span12">
+						<?=print_error($this->session->flashdata("error_string"))?>
+						<?=print_error($error_string)?>
+						<?=print_error(validation_errors())?>
+						<?=form_open('', array('id' => 'account_form'))?>
+							<div class="row-fluid">
+								<div class="span4">
+									<fieldset>
+										<legend><?=langtext('yperdetails')?></legend>
+										<label>* <?=langtext('name')?></label>
+										<input name="name" value="<?=$cu->name?>" class="large-field" type="text">
+										
+										<label>* E-Mail</label>
+										<input name="email" value="<?=$cu->email?>" class="large-field" type="text">
+										
+										<label>* <?=langtext('telephone')?></label>
+										<input name="phone" value="<?=$cu->phone?>" class="large-field" type="text">
+										
+										<label>Fax</label>
+										<input name="fax" value="<?=$cu->fax?>" class="large-field" type="text">
+									</fieldset>
+								</div>
+								<div class="span4">
+									<fieldset>
+										<legend><?=langtext('address')?></legend>
+										<label>* <?=langtext('address')?></label>
+										<input name="address" value="<?=$cu->address?>" class="large-field" type="text">
+										
+										<label>* <?=langtext('city')?></label>
+										<input name="city" value="<?=$cu->city?>" class="large-field" type="text" >
+										
+										<label>* <?=langtext('zip_code')?></label>
+										<input name="zip_code" value="<?=$cu->zip_code?>" class="large-field" type="text" >
+										
+										<label><?=langtext('country')?></label>
+										<input value="Indonesia" class="large-field" type="text" readonly="readonly">
+										
+										<label>* <?=langtext('regstate')?></label>
+										<input name="state" value="<?=$cu->state?>" class="large-field" type="text" >
+									</fieldset>
+								</div>
+								<div class="span4">
+									<fieldset>
+										<legend>&nbsp;</legend>
+										<label>Current Password</label>
+										<input type="password" name="old_password" />
+
+										<label>New Password</label>
+										<input type="password" name="password" />
+										
+										<label>Confirm Password</label>
+										<input type="password" name="retype_password" />
+									</fieldset>
+								</div>
+							</div>
+							<a class="btn btn-success" href="javascript:;" onclick="$('#account_form').submit();"><span>Save</span></a>
+						<?=form_close()?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end mid-content -->
